@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roja S — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0F2340;
+    --teal: #1E7B6E;
+    --teal-light: #D4EDE9;
+    --teal-mid: #4AADA0;
+    --sand: #F7F4EF;
+    --sand-dark: #EDE9E1;
+    --ink: #1A1A2E;
+    --ink-muted: #5A5A72;
+    --white: #FFFFFF;
+    --border: rgba(15,35,64,0.1);
+    --accent: #E8622A;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px; height: 60px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px; color: var(--navy); letter-spacing: 0.01em;
+  }
+  .nav-links { display: flex; gap: 4px; }
+  .nav-links a {
+    text-decoration: none; font-size: 13px; font-weight: 400;
+    color: var(--ink-muted); padding: 6px 14px;
+    border-radius: 100px; transition: all 0.18s;
+  }
+  .nav-links a:hover { color: var(--teal); background: var(--teal-light); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 60px;
+  }
+  .hero-left {
+    background: var(--navy);
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 80px 56px;
+  }
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--teal-mid);
+    margin-bottom: 20px;
+  }
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(52px, 6vw, 80px);
+    color: var(--white); line-height: 1.05;
+    margin-bottom: 8px;
+  }
+  .hero-name em { color: var(--teal-mid); font-style: italic; }
+  .hero-role {
+    font-size: 16px; color: rgba(255,255,255,0.55);
+    font-weight: 300; margin-bottom: 40px;
+    line-height: 1.5;
+  }
+  .hero-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 48px; }
+  .pill {
+    font-size: 12px; padding: 5px 14px; border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.05);
+  }
+  .pill.accent { border-color: var(--teal-mid); color: var(--teal-mid); }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--teal); color: var(--white);
+    font-size: 13px; font-weight: 500; padding: 12px 24px;
+    border-radius: 100px; text-decoration: none;
+    transition: background 0.18s; width: fit-content;
+  }
+  .hero-cta:hover { background: var(--teal-mid); }
+  .hero-cta svg { width: 14px; height: 14px; }
+
+  .hero-right {
+    background: var(--sand);
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 80px 56px;
+    position: relative; overflow: hidden;
+  }
+  .hero-right::before {
+    content: '';
+    position: absolute; top: -80px; right: -80px;
+    width: 320px; height: 320px; border-radius: 50%;
+    background: var(--teal-light);
+    opacity: 0.7;
+  }
+  .hero-right::after {
+    content: '';
+    position: absolute; bottom: -40px; left: -40px;
+    width: 180px; height: 180px; border-radius: 50%;
+    background: var(--sand-dark);
+  }
+  .avatar-wrap { position: relative; z-index: 1; margin-bottom: 36px; }
+  .avatar {
+    width: 96px; height: 96px; border-radius: 50%;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px; color: var(--white);
+    border: 4px solid var(--white);
+    box-shadow: 0 8px 32px rgba(15,35,64,0.15);
+  }
+  .stat-row {
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .stat-box {
+    background: var(--white); border-radius: 14px;
+    padding: 20px 18px;
+    box-shadow: 0 2px 12px rgba(15,35,64,0.07);
+  }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px; color: var(--navy); line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label { font-size: 12px; color: var(--ink-muted); }
+  .stat-box.teal-box { background: var(--teal); }
+  .stat-box.teal-box .stat-num { color: var(--white); }
+  .stat-box.teal-box .stat-label { color: rgba(255,255,255,0.7); }
+
+  /* SECTIONS */
+  section { padding: 96px 80px; }
+  .section-inner { max-width: 960px; margin: 0 auto; }
+  .eyebrow {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--teal);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(32px, 4vw, 46px);
+    color: var(--navy); line-height: 1.1;
+    margin-bottom: 48px;
+  }
+
+  /* ABOUT */
+  #about { background: var(--white); }
+  .about-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 64px; align-items: start; }
+  .about-text {
+    font-size: 18px; font-weight: 300; line-height: 1.8;
+    color: var(--ink-muted);
+  }
+  .about-text strong { color: var(--ink); font-weight: 500; }
+  .about-details { display: flex; flex-direction: column; gap: 20px; }
+  .detail-item { display: flex; flex-direction: column; gap: 3px; }
+  .detail-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-muted); }
+  .detail-value { font-size: 15px; font-weight: 500; color: var(--navy); }
+
+  /* EDUCATION */
+  #education { background: var(--sand); }
+  .edu-list { display: flex; flex-direction: column; gap: 0; }
+  .edu-item {
+    display: grid; grid-template-columns: 100px 1fr;
+    gap: 32px; align-items: start;
+    padding: 36px 0;
+    border-top: 1px solid var(--border);
+  }
+  .edu-item:last-child { border-bottom: 1px solid var(--border); }
+  .edu-year-block { text-align: right; }
+  .edu-year { font-size: 13px; font-weight: 500; color: var(--teal); }
+  .edu-status {
+    display: inline-block; margin-top: 6px;
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 3px 8px; border-radius: 100px;
+    background: var(--teal-light); color: var(--teal);
+  }
+  .edu-body { }
+  .edu-degree { font-size: 20px; font-weight: 500; color: var(--navy); margin-bottom: 4px; }
+  .edu-school { font-size: 15px; color: var(--teal); margin-bottom: 8px; }
+  .edu-note { font-size: 14px; color: var(--ink-muted); }
+
+  /* SKILLS */
+  #skills { background: var(--white); }
+  .skills-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+  .skill-group-title {
+    font-size: 13px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--ink-muted); margin-bottom: 28px;
+  }
+  .tech-skills { display: flex; flex-direction: column; gap: 24px; }
+  .skill-row { }
+  .skill-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+  .skill-name-t { font-size: 15px; font-weight: 500; color: var(--navy); }
+  .skill-pct { font-size: 13px; color: var(--teal); font-weight: 500; }
+  .skill-track {
+    height: 5px; background: var(--sand-dark); border-radius: 100px; overflow: hidden;
+  }
+  .skill-fill {
+    height: 100%; background: var(--teal); border-radius: 100px;
+    width: 0; transition: width 1.2s cubic-bezier(.4,0,.2,1);
+  }
+  .soft-skills { display: flex; flex-wrap: wrap; gap: 10px; align-content: flex-start; }
+  .soft-tag {
+    font-size: 14px; padding: 8px 18px; border-radius: 100px;
+    background: var(--sand); color: var(--ink);
+    border: 1px solid var(--border);
+    transition: all 0.18s;
+  }
+  .soft-tag:hover { background: var(--teal-light); border-color: var(--teal); color: var(--teal); }
+
+  /* HOBBIES */
+  #interests { background: var(--navy); }
+  #interests .eyebrow { color: var(--teal-mid); }
+  #interests .section-title { color: var(--white); }
+  .hobby-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .hobby-card {
+    border-radius: 20px; padding: 40px 36px; position: relative; overflow: hidden;
+  }
+  .hobby-card.sport {
+    background: var(--teal);
+  }
+  .hobby-card.music {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+  .hobby-card::before {
+    content: attr(data-char);
+    position: absolute; right: -12px; bottom: -20px;
+    font-size: 120px; line-height: 1; opacity: 0.12;
+    font-family: 'DM Serif Display', serif;
+    color: var(--white);
+    pointer-events: none;
+  }
+  .hobby-label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.6); margin-bottom: 12px;
+  }
+  .hobby-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px; color: var(--white);
+    margin-bottom: 12px;
+  }
+  .hobby-desc { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.65; }
+
+  /* ACHIEVEMENTS */
+  #achievements { background: var(--sand); }
+  .ach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .ach-card {
+    background: var(--white); border-radius: 16px;
+    padding: 28px 26px;
+    border: 1px solid var(--border);
+    transition: border-color 0.18s, transform 0.18s;
+  }
+  .ach-card:hover { border-color: var(--teal); transform: translateY(-3px); }
+  .ach-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 40px; color: var(--teal-light);
+    line-height: 1; margin-bottom: 12px;
+  }
+  .ach-text { font-size: 14px; color: var(--ink-muted); line-height: 1.65; }
+
+  /* CONTACT */
+  #contact { background: var(--white); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .contact-blurb {
+    font-size: 18px; font-weight: 300; line-height: 1.75; color: var(--ink-muted);
+  }
+  .contact-blurb strong { color: var(--navy); font-weight: 500; }
+  .contact-list { display: flex; flex-direction: column; gap: 20px; }
+  .contact-item {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 20px; border-radius: 14px;
+    border: 1px solid var(--border);
+    background: var(--sand);
+    transition: border-color 0.18s;
+  }
+  .contact-item:hover { border-color: var(--teal); }
+  .contact-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--teal); display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .contact-icon svg { width: 18px; height: 18px; stroke: white; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .contact-info-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-muted); margin-bottom: 2px; }
+  .contact-info-val { font-size: 15px; font-weight: 500; color: var(--navy); }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy); color: rgba(255,255,255,0.4);
+    text-align: center; padding: 32px;
+    font-size: 13px;
+  }
+  footer span { color: var(--teal-mid); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { opacity: 0; }
+  .fade-up.visible { animation: fadeUp 0.65s ease forwards; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 60px 28px 40px; }
+    .hero-right { padding: 40px 28px 60px; }
+    section { padding: 64px 24px; }
+    .about-grid, .skills-layout, .hobby-grid, .ach-grid, .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+    .section-title { font-size: 32px; }
+    .edu-item { grid-template-columns: 1fr; gap: 8px; }
+    .edu-year-block { text-align: left; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fade-up { opacity: 1 !important; animation: none !important; }
+    .skill-fill { transition: none !important; }
+    .hero-cta, .soft-tag, .ach-card, .contact-item { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-name">Roja S</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#skills">Skills</a>
+    <a href="#interests">Interests</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Portfolio · 2024</p>
+    <h1 class="hero-name">Roja<br><em>S.</em></h1>
+    <p class="hero-role">Computer Science Engineering Student<br>REVA University, Bengaluru</p>
+    <div class="hero-pills">
+      <span class="pill accent">CSE — 1st & 2nd Sem</span>
+      <span class="pill">Age 19</span>
+      <span class="pill">Bengaluru, KA</span>
+    </div>
+    <a href="#contact" class="hero-cta">
+      Get in touch
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7h12M8 2l5 5-5 5"/></svg>
+    </a>
+  </div>
+  <div class="hero-right">
+    <div class="avatar-wrap">
+      <div class="avatar">RS</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-box">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Tech skills</div>
+      </div>
+      <div class="stat-box teal-box">
+        <div class="stat-num">19</div>
+        <div class="stat-label">Years young</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Schools</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Hobbies</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <p class="eyebrow fade-up">Who I am</p>
+    <h2 class="section-title fade-up">Building the future,<br>one line at a time.</h2>
+    <div class="about-grid">
+      <p class="about-text fade-up">
+        I'm a <strong>motivated CSE student at REVA University</strong>, currently in my first year. My journey in tech started with curiosity — from learning C to writing Python scripts and structuring web pages with HTML. I believe technology is most powerful when it solves real problems for real people, and I'm here to be part of that story. My years at a residential school taught me <strong>discipline and independence</strong>; the classroom has taught me to think; and sport has taught me to stay focused under pressure.
+      </p>
+      <div class="about-details fade-up">
+        <div class="detail-item">
+          <span class="detail-label">University</span>
+          <span class="detail-value">REVA University</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Degree</span>
+          <span class="detail-value">B.E. — Computer Science</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Current semester</span>
+          <span class="detail-value">1st & 2nd (2024)</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Location</span>
+          <span class="detail-value">Bengaluru, Karnataka</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Looking for</span>
+          <span class="detail-value">Internships & Projects</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <p class="eyebrow fade-up">My background</p>
+    <h2 class="section-title fade-up">Education</h2>
+    <div class="edu-list">
+      <div class="edu-item fade-up">
+        <div class="edu-year-block">
+          <div class="edu-year">2024 – Now</div>
+          <span class="edu-status">Current</span>
+        </div>
+        <div class="edu-body">
+          <p class="edu-degree">B.E. in Computer Science & Engineering</p>
+          <p class="edu-school">REVA University, Bengaluru</p>
+          <p class="edu-note">Pursuing 1st & 2nd Semester — foundations in programming, algorithms, and computer systems.</p>
+        </div>
+      </div>
+      <div class="edu-item fade-up">
+        <div class="edu-year-block">
+          <div class="edu-year">2022 – 2024</div>
+        </div>
+        <div class="edu-body">
+          <p class="edu-degree">Pre-University Course (PUC) — PCMB</p>
+          <p class="edu-school">SRS PU College</p>
+          <p class="edu-note">Science stream with Physics, Chemistry, Mathematics & Biology. Built analytical thinking and a strong quantitative foundation.</p>
+        </div>
+      </div>
+      <div class="edu-item fade-up">
+        <div class="edu-year-block">
+          <div class="edu-year">Until 2022</div>
+        </div>
+        <div class="edu-body">
+          <p class="edu-degree">Secondary School — 10th Standard</p>
+          <p class="edu-school">Smt. Indira Gandhi Residential School</p>
+          <p class="edu-note">Residential schooling cultivated discipline, self-reliance, and collaborative teamwork from a young age.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <p class="eyebrow fade-up">What I know</p>
+    <h2 class="section-title fade-up">Skills</h2>
+    <div class="skills-layout">
+      <div class="fade-up">
+        <p class="skill-group-title">Technical</p>
+        <div class="tech-skills">
+          <div class="skill-row">
+            <div class="skill-top">
+              <span class="skill-name-t">C Programming</span>
+              <span class="skill-pct">75%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-w="75"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-top">
+              <span class="skill-name-t">HTML</span>
+              <span class="skill-pct">70%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-w="70"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-top">
+              <span class="skill-name-t">Python</span>
+              <span class="skill-pct">65%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-w="65"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-up">
+        <p class="skill-group-title">Soft skills</p>
+        <div class="soft-skills">
+          <span class="soft-tag">Quick learner</span>
+          <span class="soft-tag">Team player</span>
+          <span class="soft-tag">Disciplined</span>
+          <span class="soft-tag">Communicative</span>
+          <span class="soft-tag">Adaptable</span>
+          <span class="soft-tag">Problem solver</span>
+          <span class="soft-tag">Self-reliant</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTERESTS -->
+<section id="interests">
+  <div class="section-inner">
+    <p class="eyebrow fade-up">Beyond the screen</p>
+    <h2 class="section-title fade-up">Interests</h2>
+    <div class="hobby-grid">
+      <div class="hobby-card sport fade-up" data-char="B">
+        <p class="hobby-label">Sport</p>
+        <h3 class="hobby-title">Badminton</h3>
+        <p class="hobby-desc">Playing badminton sharpens my strategic thinking, improves focus, and keeps me agile — skills that translate directly into tackling tough coding challenges.</p>
+      </div>
+      <div class="hobby-card music fade-up" data-char="M">
+        <p class="hobby-label">Creative</p>
+        <h3 class="hobby-title">Music</h3>
+        <p class="hobby-desc">Music is where I find flow. It cultivates patience, pattern recognition, and creative thinking — a different kind of programming, where emotion is the output.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-inner">
+    <p class="eyebrow fade-up">What I've done</p>
+    <h2 class="section-title fade-up">Achievements</h2>
+    <div class="ach-grid">
+      <div class="ach-card fade-up">
+        <div class="ach-num">01</div>
+        <p class="ach-text">Completed foundational coursework in C programming during 1st semester at REVA University, building strong structured programming fundamentals.</p>
+      </div>
+      <div class="ach-card fade-up">
+        <div class="ach-num">02</div>
+        <p class="ach-text">Built and deployed static web pages using HTML — demonstrating understanding of document structure and web semantics.</p>
+      </div>
+      <div class="ach-card fade-up">
+        <div class="ach-num">03</div>
+        <p class="ach-text">Demonstrated exceptional discipline and self-reliance through years at a residential school environment, building independence from a young age.</p>
+      </div>
+      <div class="ach-card fade-up">
+        <div class="ach-num">04</div>
+        <p class="ach-text">Active Badminton player — consistently builds competitive spirit, teamwork, and strategic thinking through regular sports participation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <p class="eyebrow fade-up">Say hello</p>
+    <h2 class="section-title fade-up">Get in touch</h2>
+    <div class="contact-grid">
+      <p class="contact-blurb fade-up">
+        I'm actively looking for <strong>internships, collaborative projects, and learning opportunities</strong>. Whether you have an exciting project in mind or just want to connect — I'd love to hear from you.
+      </p>
+      <div class="contact-list">
+        <div class="contact-item fade-up">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <p class="contact-info-label">Location</p>
+            <p class="contact-info-val">Bengaluru, Karnataka, India</p>
+          </div>
+        </div>
+        <div class="contact-item fade-up">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5"/><path d="M6 12v5c0 1.1 3.6 3 6 3s6-1.9 6-3v-5"/></svg>
+          </div>
+          <div>
+            <p class="contact-info-label">University</p>
+            <p class="contact-info-val">REVA University — CSE</p>
+          </div>
+        </div>
+        <div class="contact-item fade-up">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+          </div>
+          <div>
+            <p class="contact-info-label">Email</p>
+            <p class="contact-info-val">Add your email here</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Designed & built for <span>Roja S</span> · Computer Science Engineering · REVA University · 2024
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        const fills = entry.target.querySelectorAll('.skill-fill');
+        fills.forEach(f => {
+          setTimeout(() => { f.style.width = f.dataset.w + '%'; }, 200);
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade-up').forEach((el, i) => {
+    el.style.animationDelay = (i % 3) * 0.1 + 's';
+    observer.observe(el);
+  });
+
+  const skillSection = document.getElementById('skills');
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        document.querySelectorAll('.skill-fill').forEach(f => {
+          f.style.width = f.dataset.w + '%';
+        });
+        skillObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  skillObserver.observe(skillSection);
+</script>
+
+</body>
+</html>
