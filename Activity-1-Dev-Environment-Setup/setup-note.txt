@@ -1,0 +1,9 @@
+C/C++ Development Environment Setup
+
+1. I installed Visual Studio Code on my Windows system.
+2. I installed the Microsoft C/C++ extension.
+3. I installed GCC and G++ compilers using MSYS2.
+4. I verified GCC and G++ using their version commands.
+5. I created a C program named hello.c.
+6. I compiled the program using GCC.
+7. I executed the program successfully and received the output Hello, World!
